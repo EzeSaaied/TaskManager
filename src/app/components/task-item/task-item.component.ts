@@ -29,7 +29,7 @@ export class TaskItemComponent implements OnInit {
         title:["", [Validators.required]],
         description:["", [Validators.required]],
         datetime: [, [Validators.required]],
-        reminder: [, [Validators.required]],
+        reminder: [false, [Validators.required]],
       }
     )
   }
