@@ -1,0 +1,44 @@
+<form [formGroup]="form" (ngSubmit)="onCreate($event)" class="form-cont">
+    <div class="form-section">
+        <div class="input-cont">
+            <label for="title">Title</label>
+            <input formControlName="title" type="text" name="title" [ngClass]="{'is-invalid': Title?.errors && Title?.touched, 'is-valid': !Title?.errors && Title?.touched}">
+        </div>
+        <div *ngIf="Title?.errors && Title?.touched" class="error-msg">
+            <p *ngIf="Title?.hasError('required')">
+                The title is required.
+            </p>
+        </div>
+    </div>
+    <div class="form-section">
+        <div class="input-cont">
+            <label for="description">Description</label>
+            <input formControlName="description" type="text" name="description" [ngClass]="{'is-invalid': Description?.errors && Description?.touched, 'is-valid': !Description?.errors && Description?.touched}">
+        </div>
+        <div *ngIf="Description?.errors && Description?.touched" class="error-msg">
+            <p *ngIf="Description?.hasError('required')">
+                The description is required.
+            </p>
+        </div>
+    </div>
+    <div class="form-section">
+        <div class="input-cont">
+            <label for="datetime">Date and time</label>
+            <input formControlName="datetime" type="datetime-local" name="date" [ngClass]="{'is-invalid': Datetime?.errors && Datetime?.touched, 'is-valid': !Datetime?.errors && Datetime?.touched}">
+        </div>
+        <div *ngIf="Datetime?.errors && Datetime?.touched" class="error-msg">
+            <p *ngIf="Datetime?.hasError('required')">
+                The date and time are required.
+            </p>
+        </div>
+    </div>
+    <div class="form-section">
+        <div class="input-cont">
+            <label for="reminder">Reminder</label>
+            <input formControlName="reminder" type="checkbox" name="reminder">
+        </div>
+    </div>
+    <div class="form-section">
+        <input type="submit" name="submit" value="Send" [disabled]="form.invalid">
+    </div>
+</form>

@@ -1,0 +1,10 @@
+<div class="item-cont">
+    <div class="item-text">
+        <p class="item-title">{{item.title}}</p>
+        <p class="item-description">{{item.description}}</p>
+    </div>
+    <div class="item-date-time" [ngClass]="{'reminder-true': item.reminder === true}">
+        <div class="item-hour">{{item.hour}}:{{item.minute}}</div>
+        <div class="item-date">{{item.day}}/<span *ngIf="item.month < 10">0</span>{{item.month}}/{{item.year}}</div>
+    </div>
+</div>

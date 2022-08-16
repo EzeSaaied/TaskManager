@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.is-invalid {
+    border-color: red;
+}
+
+.is-valid {
+    border-color: lightgreen;
+}
+
+.error-msg {
+    color: red;
+    font-style: italic;
+}
