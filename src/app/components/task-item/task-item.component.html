@@ -1,10 +1,62 @@
-<div class="item-cont">
-    <div class="item-text">
-        <p class="item-title">{{item.title}}</p>
-        <p class="item-description">{{item.description}}</p>
+<div class="item-card">
+    <div class="item-cont">
+        <div class="item-buttons center">
+            <fa-icon [icon]="faSquarePen" class="edit-btn" (click)="toggleEdit()"></fa-icon>
+            <fa-icon [icon]="faSquareXmark" class="delete-btn" (click)="onDelete(task)"></fa-icon>
+        </div>
+        <div class="item-text center">
+            <p class="item-title">{{task.title}}</p>
+            <p class="item-description">{{task.description}}</p>
+        </div>
+        <div class="item-date-time center" [ngClass]="{'reminder-true': task.reminder.toString() == 'true'}">
+            <div class="item-hour">{{task.datetime | date:'hh:mm'}}</div>
+            <div class="item-date">{{task.datetime | date:'dd/MM/yyyy'}}</div>
+        </div>
     </div>
-    <div class="item-date-time" [ngClass]="{'reminder-true': item.reminder === true}">
-        <div class="item-hour">{{item.hour}}:{{item.minute}}</div>
-        <div class="item-date">{{item.day}}/<span *ngIf="item.month < 10">0</span>{{item.month}}/{{item.year}}</div>
+    <div class="edit-cont" *ngIf="editTaskBtn">
+        <form [formGroup]="form" (ngSubmit)="onEdit(task)" class="form-cont">
+            <div class="form-section">
+                <div class="input-cont">
+                    <label for="title">Title</label>
+                    <input formControlName="title" type="text" name="title" [ngClass]="{'is-invalid': Title?.errors && Title?.touched, 'is-valid': !Title?.errors && Title?.touched}" [(ngModel)]="task.title">
+                </div>
+                <div *ngIf="Title?.errors && Title?.touched" class="error-msg">
+                    <p *ngIf="Title?.hasError('required')">
+                        The title is required.
+                    </p>
+                </div>
+            </div>
+            <div class="form-section">
+                <div class="input-cont">
+                    <label for="description">Description</label>
+                    <input formControlName="description" type="text" name="description" [ngClass]="{'is-invalid': Description?.errors && Description?.touched, 'is-valid': !Description?.errors && Description?.touched}" [(ngModel)]="task.description">
+                </div>
+                <div *ngIf="Description?.errors && Description?.touched" class="error-msg">
+                    <p *ngIf="Description?.hasError('required')">
+                        The description is required.
+                    </p>
+                </div>
+            </div>
+            <div class="form-section">
+                <div class="input-cont">
+                    <label for="datetime">Date and time</label>
+                    <input formControlName="datetime" type="datetime-local" name="date" [ngClass]="{'is-invalid': Datetime?.errors && Datetime?.touched, 'is-valid': !Datetime?.errors && Datetime?.touched}" [(ngModel)]="task.datetime">
+                </div>
+                <div *ngIf="Datetime?.errors && Datetime?.touched" class="error-msg">
+                    <p *ngIf="Datetime?.hasError('required')">
+                        The date and time are required.
+                    </p>
+                </div>
+            </div>
+            <div class="form-section">
+                <div class="input-cont">
+                    <label for="reminder">Reminder</label>
+                    <input formControlName="reminder" type="checkbox" name="reminder" [(ngModel)]="task.reminder">
+                </div>
+            </div>
+            <div class="form-section">
+                <input type="submit" name="submit" value="Send" [disabled]="form.invalid">
+            </div>
+        </form>
     </div>
 </div>

@@ -1,0 +1,4 @@
+<app-task-item *ngFor="let taskActual of tasks" [task]="taskActual"
+(onDeleteTask)="deleteTask($event)" 
+(onEditTask)="editTask($event)">
+</app-task-item>

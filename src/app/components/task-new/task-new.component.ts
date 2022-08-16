@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-new',
@@ -8,9 +10,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class TaskNewComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: UntypedFormBuilder, private taskSvc: TaskService, private router: Router) { 
 
     this.form = this.formBuilder.group (
       {
@@ -42,7 +44,10 @@ export class TaskNewComponent implements OnInit {
   }
 
   onCreate(event: Event) {
-    console.log(this.form.value);
-  }
-
+    event.preventDefault;
+    this.taskSvc.createTask(this.form.value).subscribe(data => {
+      console.log(JSON.stringify(data));
+      location.reload()});
+    }
+  
 }

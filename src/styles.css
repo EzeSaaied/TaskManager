@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .is-invalid {
     border-color: red;
 }
